@@ -1,5 +1,4 @@
-module execs
-
+module github.com/hidenba/execs
 go 1.18
 
 require (
