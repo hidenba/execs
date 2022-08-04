@@ -12,6 +12,7 @@ import (
 	"strconv"
 
 	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/credentials/stscreds"
 	"github.com/aws/aws-sdk-go-v2/service/ecs"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 )
@@ -24,9 +25,14 @@ func main()  {
 	flag.Parse()
 
 	cfg, error := config.LoadDefaultConfig(
-		context.TODO(),
+		context.Background(),
 		config.WithRegion(*region),
 		config.WithSharedConfigProfile(*profile),
+		config.WithAssumeRoleCredentialOptions(func(options *stscreds.AssumeRoleOptions) {
+			options.TokenProvider = func() (string, error) {
+				return stscreds.StdinTokenProvider()
+			}
+		}),
 	)
 
 	if error != nil {
