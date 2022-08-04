@@ -9,7 +9,7 @@ Interactively select arguments to connect with ECS Exec to connect to Fargate.
 ## Go
 
 ```
-go install github.com/hidenba/execs.git@latest
+go install github.com/hidenba/execs@latest
 ```
 
 # Usage
