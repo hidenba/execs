@@ -192,7 +192,12 @@ func selectArn(target string, fn func() []string) string {
 	}
 	fmt.Print("input number: ")
 
-	intValue := scanInt()
+	intValue := 1
+	if len(arns) == 1 {
+		fmt.Println("1")
+	} else {
+		intValue = scanInt()
+	}
 
 	if (intValue <= 0 || (intValue - 1) >= len(arns)) {
 		log.Fatalf("invalid number: %d", intValue)
